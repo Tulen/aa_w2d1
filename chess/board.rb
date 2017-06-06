@@ -1,7 +1,7 @@
 require_relative 'display.rb'
 require_relative 'pieces.rb'
 class Board
-  attr_reader :grid
+  attr_reader :grid, :display
   FRONT_ROW_B = Array.new(8, Pawn.new(self,:b))
   BACK_ROW_B = [
     Rook.new(self,:b),
@@ -30,6 +30,7 @@ class Board
     @grid[7] = FRONT_ROW_B
     @grid[0] = BACK_ROW_W
     @grid[8] = BACK_ROW_B
+    @display = Display.new(self,[0,0])
   end
 
   def move_piece(start_pos, end_pos)
@@ -50,8 +51,8 @@ class Board
   end
 
   def in_bounds?(pos)
-    position.each do |x|
-      if x > 8 || x < 0
+    pos.each do |x|
+      if x > 7 || x < 0
         return false
       end
     end

@@ -41,7 +41,7 @@ class Cursor
 
   def get_input
     key = KEYMAP[read_char]
-    handle_key(key)
+    update_pos(handle_key(key))
   end
 
   private
@@ -78,7 +78,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return || :space
-      return @cursor_pos
+      @cursor_pos
     when :left
       MOVES[:left].map.with_index { |el, idx| el + @cursor_pos[idx] }
     when :right
@@ -93,7 +93,6 @@ class Cursor
   end
 
   def update_pos(diff)
-    new_pos = diff.map.with_index { |el, idx| el + @cursor_pos[idx] }
-    @cursor_pos = new_pos if board.in_bounds?(new_pos)
+    @cursor_pos = diff if board.in_bounds?(diff)
   end
 end

@@ -1,32 +1,33 @@
-# class Game
-#
-#   def initialize
-#     @board = Board.new
-#     @player = Player.new
-#   end
-#
-#   def play
-#     play_turn until won?
-#
-#   end
-#
-#   def play_turn
-#
-#   end
-#
-#   def won?
-#   end
-#
-#
-# end
+require_relative "board"
+
+class Game
+
+  def initialize
+    @board = Board.new
+    # @player = Player.new
+  end
+
+  def play
+    play_turn until false
+  end
+
+  def play_turn
+    system('clear')
+    @board.display.render
+    @board.display.cursor.get_input
+    system('clear')
+    @board.display.render
+  end
+
+  def won?
+
+  end
+
+
+end
 
 
 
 
-load "board.rb"
-load "display.rb"
-load "cursor.rb"
-a = Board.new
-c = Cursor.new([0,0],a)
-b = Display.new(a,c.cursor_pos)
-b.render
+a = Game.new
+a.play
