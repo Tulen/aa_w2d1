@@ -2,23 +2,34 @@ require_relative 'display.rb'
 require_relative 'pieces.rb'
 class Board
   attr_reader :board
-  FRONT_ROW = Array.new(8, Piece.new)
-  BACK_ROW = [
-    Piece.new,
-    Piece.new,
-    Piece.new,
-    Piece.new,
-    Piece.new,
-    Piece.new,
-    Piece.new,
-    Piece.new,
+  FRONT_ROW_B = Array.new(8, Pawn.new(self,:b))
+  BACK_ROW_B = [
+    Rook.new(self,:b),
+    Knight.new(self,:b),
+    Bishop.new(self,:b),
+    Queen.new(self,:b),
+    King.new(self,:b),
+    Bishop.new(self,:b),
+    Knight.new(self,:b),
+    Rook.new(self,:b),
+  ]
+  FRONT_ROW_W= Array.new(8, Pawn.new(self,:w))
+  BACK_ROW_W = [
+    Rook.new(self,:w),
+    Knight.new(self,:w),
+    Bishop.new(self,:w),
+    Queen.new(self,:w),
+    King.new(self,:w),
+    Bishop.new(self,:w),
+    Knight.new(self,:w),
+    Rook.new(self,:w),
   ]
   def initialize
     @board = Array.new(8) {Array.new(8, nil)}
-    @board[1] = FRONT_ROW
-    @board[7] = FRONT_ROW
-    @board[0] = BACK_ROW
-    @board[8] = BACK_ROW
+    @board[1] = FRONT_ROW_W
+    @board[7] = FRONT_ROW_B
+    @board[0] = BACK_ROW_W
+    @board[8] = BACK_ROW_B
   end
 
   def move_piece(start_pos, end_pos)

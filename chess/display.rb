@@ -14,15 +14,21 @@ class Display
       row.each_with_index do |piece,col_idx|
         if @cursor.cursor_pos == [row_idx,col_idx]
           if piece.class == Piece
-            row_string << piece.render_img.red
-            # row_string << "P".red
+            if piece.color == :w
+              row_string << piece.render_img[0].red
+            else
+              row_string << piece.render_img[1].red
+            end
           else
             row_string << "_".red
           end
         else
           if piece.class == Piece
-            # row_string << "P"
-            row_string << piece.render_img
+            if piece.color == :w
+              row_string << piece.render_img[0]
+            else
+              row_string << piece.render_img[1]
+            end
           else
             row_string << "_"
           end

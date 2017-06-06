@@ -1,23 +1,24 @@
-class Game
-  def initialize
-    @board = Board.new
-
-  end
-
-  def play
-    play_turn until won?
-
-  end
-
-  def play_turn
-    
-  end
-
-  def won?
-  end
-
-
-end
+# class Game
+#
+#   def initialize
+#     @board = Board.new
+#     @player = Player.new
+#   end
+#
+#   def play
+#     play_turn until won?
+#
+#   end
+#
+#   def play_turn
+#
+#   end
+#
+#   def won?
+#   end
+#
+#
+# end
 
 
 
