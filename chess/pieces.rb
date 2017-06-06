@@ -10,7 +10,7 @@ module SteppingPiece
 end
 
 class Piece
-  attr_reader :render_img
+  attr_reader :render_img, :color
   def initialize(board, color)
     @board = board
     @color = color
@@ -63,6 +63,5 @@ class NullPiece < Piece
   include Singleton
   def initialize(board, color)
     super
-    @symbol
   end
 end

@@ -1,7 +1,7 @@
 require_relative 'display.rb'
 require_relative 'pieces.rb'
 class Board
-  attr_reader :board
+  attr_reader :grid
   FRONT_ROW_B = Array.new(8, Pawn.new(self,:b))
   BACK_ROW_B = [
     Rook.new(self,:b),
@@ -25,28 +25,28 @@ class Board
     Rook.new(self,:w),
   ]
   def initialize
-    @board = Array.new(8) {Array.new(8, nil)}
-    @board[1] = FRONT_ROW_W
-    @board[7] = FRONT_ROW_B
-    @board[0] = BACK_ROW_W
-    @board[8] = BACK_ROW_B
+    @grid = Array.new(8) {Array.new(8, nil)}
+    @grid[1] = FRONT_ROW_W
+    @grid[7] = FRONT_ROW_B
+    @grid[0] = BACK_ROW_W
+    @grid[8] = BACK_ROW_B
   end
 
   def move_piece(start_pos, end_pos)
 
-    # raise 'There is no piece at this position' if @board[a[0].to_i, b[0].to_i].nil?
+    # raise 'There is no piece at this position' if @grid[a[0].to_i, b[0].to_i].nil?
     #raise 'Invalid move' unless valid_move?
 
   end
 
   def [](pos)
     row, col = pos
-    @board[row][col]
+    @grid[row][col]
   end
 
   def []=(pos)
     row, col = pos
-    @board[row][col] = pos
+    @grid[row][col] = pos
   end
 
   def in_bounds?(pos)
