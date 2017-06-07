@@ -11,10 +11,10 @@ class Display
   def render
 
     row_string = ""
-    @board.grid.each_with_index do |row, row_idx|
+    @board.grid.reverse.each_with_index do |row, row_idx|
       row.each_with_index do |piece,col_idx|
-        if @cursor.cursor_pos == [row_idx,col_idx]
-          if piece.class.superclass == Piece
+        if @cursor.cursor_pos == [@board.grid.length - 1 - row_idx,col_idx]
+          if piece.class != NullPiece
             if piece.color == :w
               row_string << piece.render_img[0].colorize(:red)
             else
@@ -24,7 +24,7 @@ class Display
             row_string << "_".red
           end
         else
-          if piece.class.superclass == Piece
+          if piece.class != NullPiece
             if piece.color == :w
               row_string << piece.render_img[0]
             else

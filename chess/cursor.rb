@@ -84,9 +84,9 @@ class Cursor
     when :right
       MOVES[:right].map.with_index { |el, idx| el + @cursor_pos[idx] }
     when :up
-      MOVES[:up].map.with_index { |el, idx| el + @cursor_pos[idx] }
-    when :down
       MOVES[:down].map.with_index { |el, idx| el + @cursor_pos[idx] }
+    when :down
+      MOVES[:up].map.with_index { |el, idx| el + @cursor_pos[idx] }
     when :ctrl_c
       Process.exit(0)
     end
