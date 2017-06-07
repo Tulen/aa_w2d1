@@ -12,9 +12,9 @@ module SlidingPiece
     moves = []
     @board.grid.length.times do |i|
       row_pos = current_pos.first + i
-      row_pos %= grid.length-1 if row_pos < grid.length
+      row_pos %= @board.grid.length-1 if row_pos < @board.grid.length
       col_pos = current_pos.last + i
-      col_pos %= grid.length-1 if col_pos < grid.length
+      col_pos %= @board.grid.length-1 if col_pos < @board.grid.length
       moves << [row_pos,col_pos]
     end
     moves
@@ -43,7 +43,6 @@ class Piece
   def moves
   end
 
-
 end
 
 class King < Piece
@@ -70,6 +69,7 @@ class King < Piece
     end
     valid_arr.select{|arr| @board.in_bounds?(arr)}
   end
+
 end
 
 class Queen < Piece
@@ -82,6 +82,20 @@ class Queen < Piece
 
   def moves
     possible_moves = move_straight(@current_pos) + move_diagonally(@current_pos)
+    valid_moves(possible_moves)
+  end
+  ## Fix valid move logic
+  def valid_moves(possible_moves_array)
+    valid_arr = []
+    blocked_arr = []
+    possible_moves_array.each do |arr|
+      if self.color == @board[[arr.first, arr.last]].color
+        blocked_arr << arr
+      else
+        valid_arr << arr unless possible_moves_array.index(arr) > possible_moves_array.index(blocked_arr)
+      end
+    end
+    valid_arr.select{|arr| @board.in_bounds?(arr)}
   end
 end
 
